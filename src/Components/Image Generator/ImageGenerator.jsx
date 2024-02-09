@@ -16,7 +16,7 @@ const ImageGenerator = () => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'X-RapidAPI-Key': '65fcecc6ffmshbfe23985fa2eb79p11d14bjsn19dd97dfd12f',
+                    'X-RapidAPI-Key': process.env.REACT_APP_RAPIDKEY,
                     'X-RapidAPI-Host': 'ai-image-generator3.p.rapidapi.com'
                 },
                 body: JSON.stringify({  // Convert the body to JSON string
@@ -45,7 +45,7 @@ const ImageGenerator = () => {
         <div className='ai-image-generator'>
             <div className="header">AI Image generator</div>
             <div className='img-loading'>
-                <div class='image'><img src={imageUrl} alt="Generated" id="imgg"  /></div>
+                <div className='image'><img src={imageUrl} alt="Generated" id="imgg" /></div>
                 {/* let x=document.querySelector("#imgg");
                 x.innerHTML= "" */}
             </div>
