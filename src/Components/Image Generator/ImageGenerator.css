@@ -1,10 +1,7 @@
 .ai-image-generator{
     width: fit-content;
     margin: auto;
-    align-items: center;
-    margin-top: 80px;
-    margin-bottom: 2Øpx;
-    gap: 30px;
+    
 }
 .header {
     text-align: center;
@@ -19,8 +16,8 @@ body{
 }
 
 #imgg{
-    /* height: 50vh; */
-    width: 37vh;
+    height: 50vh;
+    width: 30vw;
 }
 
 .img-loading{
