@@ -10,36 +10,30 @@ const ImageGenerator = () => {
         if (inputRef.current.value === "") {
             return;
         }
+        const url = 'https://chatgpt-42.p.rapidapi.com/texttoimage';
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-RapidAPI-Key': process.env.REACT_APP_RAPIDKEY,
+                'X-RapidAPI-Host': 'chatgpt-42.p.rapidapi.com'
+            },
+            body: JSON.stringify({ 
+                text: inputRef.current.value
+            })
+        };
         try {
-            const url = 'https://ai-image-generator3.p.rapidapi.com/generate';
-            const options = {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-RapidAPI-Key': process.env.REACT_APP_RAPIDKEY,
-                    'X-RapidAPI-Host': 'ai-image-generator3.p.rapidapi.com'
-                },
-                body: JSON.stringify({  // Convert the body to JSON string
-                    prompt: inputRef.current.value,  // Use the input value as the prompt
-                    page: 1,
-                    size: 'medium', // Set the size to medium
-                })
-            };
-
             const response = await fetch(url, options);
-            const data = await response.json(); // Parse the response as JSON
-
-            if (data.results && data.results.images && data.results.images.length > 0) {
-                const generatedImageUrl = data.results.images[0]; // Assuming the first image in the array is the generated image
-                setImageUrl(generatedImageUrl); // Set the generated image URL in the state
-            } else {
-                // Handle the case where no images are returned
-                console.error('No images found in the response');
-            }
+            const result = await response.json(); // Parse response as JSON
+            console.log(result);
+            // const imageUrl = (result); // Convert string URL to URL object
+        //     const imageUrl = result.url; // Access the URL from the response
+        // console.log(imageUrl); // Check if the URL is correct
+        setImageUrl(result.generated_image);
         } catch (error) {
             console.error(error);
         }
-    }
+    };
 
     return (
         <div className='ai-image-generator'>
@@ -55,6 +49,6 @@ const ImageGenerator = () => {
             </div>
         </div>
     );
-}
+};
 
 export default ImageGenerator;
